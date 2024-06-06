@@ -1,8 +1,10 @@
 import React from "react";
 import Product from "./Product";
 import { useFilter } from "../../context/FilterContext";
+import { useFilterPrice } from "../../context/FilterPriceContext";
 export default function ProductList({ products, filter }) {
   const { sortBy } = useFilter();
+  const { filterPrice } = useFilterPrice();
   let filteredProducts =
     filter === "TẤT CẢ"
       ? products
@@ -19,7 +21,31 @@ export default function ProductList({ products, filter }) {
       (a, b) => b.currentPrice - a.currentPrice
     );
   }
+  console.log(filterPrice);
+  const filterProductsByPrice = (product) => {
+    switch (filterPrice) {
+      case "Dưới 10 triệu":
+        return product.currentPrice < 10000000;
+      case "Từ 10-15 triệu":
+        return (
+          product.currentPrice >= 10000000 && product.currentPrice <= 15000000
+        );
+      case "Từ 15-20 triệu":
+        return (
+          product.currentPrice >= 15000000 && product.currentPrice <= 20000000
+        );
+      case "Từ 20-25 triệu":
+        return (
+          product.currentPrice >= 20000000 && product.currentPrice <= 25000000
+        );
+      case "Trên 25 triệu":
+        return product.currentPrice > 25000000;
+      default:
+        return true; // Return true for "Tất cả" option or if no filter is selected
+    }
+  };
 
+  filteredProducts = filteredProducts.filter(filterProductsByPrice);
   return (
     <>
       <div className="home-product">

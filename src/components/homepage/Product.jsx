@@ -4,6 +4,12 @@ import ProductConfig from "./ProductConfig";
 import ProductInfo from "./ProductInfo";
 import AddProduct from "./AddProduct";
 import { Link } from "react-router-dom";
+
+function formatPrice(price) {
+  return new Intl.NumberFormat("vi-VN", { maximumSignificantDigits: 3 }).format(
+    price
+  );
+}
 export default function Product({ product }) {
   return (
     <>
@@ -15,7 +21,7 @@ export default function Product({ product }) {
           />
           <ProductInfo
             name={product.name}
-            currentPrice={product.currentPrice}
+            currentPrice={formatPrice(product.currentPrice)}
             oldPrice={product.oldPrice}
           />
           <ProductConfig

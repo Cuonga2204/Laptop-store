@@ -1,9 +1,15 @@
 import React from "react";
 import { useFilter } from "../../context/FilterContext";
 // import { sortByPrice } from "./ProductList";
-
+import { useState } from "react";
 export default function HomeFilter() {
   const { handleSort } = useFilter();
+  const [selectedSort, setSelectedSort] = useState("Giá");
+  const handleClick = (type, label) => {
+    setSelectedSort(label);
+    handleSort(type);
+  };
+
   return (
     <>
       <div className="home-filter">
@@ -15,14 +21,14 @@ export default function HomeFilter() {
         <button className="btn home-filter__lable-btn">Mới nhất </button>
         <button className="btn home-filter__lable-btn">Bán chạy</button>
         <div className="slect-input">
-          <span className="slect-input__label">Giá</span>
+          <span className="slect-input__label">{selectedSort}</span>
           <i className="slect-input__label-icon fa-solid fa-angle-down"></i>
           <ul className="slect-input-list">
             <li className="slect-input-item">
               <div
                 href="/"
                 className="slect-input-link"
-                onClick={() => handleSort("ASC")}
+                onClick={() => handleClick("ASC", "Giá: thấp đến cao")}
               >
                 Giá: thấp đến cao
               </div>
@@ -31,7 +37,7 @@ export default function HomeFilter() {
               <div
                 href="/"
                 className="slect-input-link"
-                onClick={() => handleSort("DESC")}
+                onClick={() => handleClick("DESC", "Giá: cao đến thấp")}
               >
                 Giá: cao đến thấp
               </div>
