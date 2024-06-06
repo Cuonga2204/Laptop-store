@@ -1,9 +1,58 @@
 import React from "react";
 import AuthHeader from "./AuthHeader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthFormInput from "./AuthFormInput";
+import { useState, useEffect } from "react";
+export default function AuthContainer({ title }) {
+  const DEFAULT_ACCOUNTS = [
+    {
+      email: "Cuong123",
+      password: "123",
+    },
+    {
+      email: "manh123",
+      password: "123",
+    },
+  ];
 
-export default function AuthContainer({ title, children }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [listAccount, setListAccount] = useState(DEFAULT_ACCOUNTS);
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedAccounts = JSON.parse(localStorage.getItem("listAccount"));
+    setListAccount(storedAccounts);
+  }, []);
+
+  const handleSignUp = () => {
+    if (password !== confirmPassword) {
+      alert("Mật khẩu không khớp!");
+      return;
+    }
+    // Store user details in localStorage
+    const newAccount = [...listAccount, { email: email, password: password }];
+    localStorage.setItem("listAccount", JSON.stringify(newAccount));
+    alert("Đăng ký thành công!");
+  };
+
+  const handleLogin = () => {
+    const storedAccounts = JSON.parse(localStorage.getItem("listAccount"));
+    const foundAccount = storedAccounts.find(
+      (account) => account.email === email && account.password === password
+    );
+
+    if (foundAccount) {
+      navigate("/"); // Điều chỉnh đường dẫn tới trang chủ của bạn
+    } else {
+      alert("Email hoặc mật khẩu không đúng!");
+    }
+  };
+
   return (
     <div>
       <AuthHeader title={title} />
@@ -22,10 +71,24 @@ export default function AuthContainer({ title, children }) {
                 </h3>
               </div>
               <div className="auth-form__form">
-                <AuthFormInput placeholder="Nhập email" />
-                <AuthFormInput placeholder="Nhập mật khẩu" />
+                <AuthFormInput
+                  value={email}
+                  placeholder="Nhập email"
+                  onChange={handleEmailChange}
+                />
+                <AuthFormInput
+                  type="password"
+                  value={password}
+                  placeholder="Nhập mật khẩu"
+                  onChange={handlePasswordChange}
+                />
                 {title === "Đăng ký" && (
-                  <AuthFormInput placeholder="Nhập lại mật khẩu" />
+                  <AuthFormInput
+                    placeholder="Nhập lại mật khẩu"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={handleConfirmPasswordChange}
+                  />
                 )}
               </div>
               <div className="auth-form__aside">
@@ -57,10 +120,14 @@ export default function AuthContainer({ title, children }) {
                   Trở lại
                 </button>
                 {title === "Đăng nhập" ? (
-                  <button className="btn btn-primary">Đăng nhập</button>
+                  <button className="btn btn-primary" onClick={handleLogin}>
+                    Đăng nhập
+                  </button>
                 ) : (
-                  <Link to="/login">
-                    <button className="btn btn-primary">Đăng ký</button>
+                  <Link to={"/login"}>
+                    <button className="btn btn-primary" onClick={handleSignUp}>
+                      Đăng ký
+                    </button>
                   </Link>
                 )}
               </div>

@@ -123,3 +123,25 @@
     background-color: var(--primary-color);
     color: white;
 }
+.modal-body-product-order{
+    margin: auto;
+    background-color: var(--white-color);
+    z-index: 2;
+    width:900px;
+    height: auto;
+    border-radius: 15px;
+}
+/* ModalOrder */
+.customer-order-infor{
+    padding: 16px;
+}
+.address-order-header{
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+.customer-infor{
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    font-weight: 400;
+    margin-top: 10px;
+}

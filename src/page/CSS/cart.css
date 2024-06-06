@@ -34,28 +34,30 @@
     
 }
 .cart-header__name{
-    font-size: 1.2rem;
+    font-weight: 500;
+    font-size: 1.4rem;
     width: 46%;
     display: flex;
     align-items: center;
 }
 .cart-header__price{
+    margin-left: auto;
     width: 15%;
-    font-size: 1.2rem;
-    text-align: center;
-    color: #888;
+    font-size: 1.4rem;
+    text-align: center; 
+    color: var(--text-color);
 }
 .cart-header__quantity{
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     width: 15%;
     text-align: center;
-    color: #888;
+    color:var(--text-color);
 }
 .cart-header__cart-header__price-total{
     width: 11%;
     text-align: center;
-    color: #888;
-    font-size: 1.2rem;
+    color: var(--text-color);
+    font-size: 1.4rem;
 }
 
 .cart-header__operation{
@@ -101,6 +103,7 @@
     align-items: center;
     justify-content: flex-end;
     padding-right: 20px;
+    margin-bottom: 10px;
 }
 .cart-product-total{
     font-size: 1.4rem;
@@ -109,16 +112,17 @@
     text-align: center;
 }
 .cart-product-total-price{
+    color: var(--primary-color);
     font-size: 1.4rem;
     width: 11%;
     text-align: center;
+    font-size: 1.8rem;
+    font-weight: 500;
 
 }
 .btn-cart-pay{
     width: 12%;
     background-color: var(--primary-color);
     color:white;
-
-    
 }
 

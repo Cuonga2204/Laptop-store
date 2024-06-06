@@ -1,6 +1,7 @@
 import React from "react";
-import Cart from "./Cart";
+import CartNavbar from "./CartNavbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import {
   faCartShopping,
   faCircleUser,
@@ -13,12 +14,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import HeaderUserMenu from "./HeaderUserMenu";
-
+import { useState } from "react";
 const HeaderLogo = () => {
   return (
-    <div className="header-logo">
-      <img src="/img/Logo3.png" className="header__logo-img" alt="" />
-    </div>
+    <Link to={"/"}>
+      <div className="header-logo">
+        <img src="/img/Logo3.png" className="header__logo-img" alt="" />
+      </div>
+    </Link>
   );
 };
 
@@ -49,9 +52,9 @@ const HeaderSearchHistory = () => {
 };
 
 // Component con HeaderMenuItem
-const HeaderMenuItem = ({ iconName, iconClass, title }) => {
+const HeaderMenuItem = ({ iconName, iconClass, title, onClick }) => {
   return (
-    <li className="header-menu-list__item">
+    <li className="header-menu-list__item" onClick={onClick}>
       <div>
         <FontAwesomeIcon icon={iconName} className={iconClass} />
         <span>{title}</span>
@@ -68,13 +71,17 @@ const HeaderSearchListItem = ({ iconName, iconClass, title, itemClass }) => {
           <FontAwesomeIcon icon={iconName} className={iconClass} />
         </div>
         <span className="header-search-list-item-name">{title}</span>
-        <Cart />
+        <CartNavbar />
       </a>
       <HeaderUserMenu />
     </li>
   );
 };
-const NavBar = () => {
+const NavBar = ({ setFilter }) => {
+  const handleFilterClick = (filter) => {
+    setFilter(filter);
+  };
+
   return (
     <div>
       <header className="header">
@@ -115,13 +122,14 @@ const NavBar = () => {
                   iconClass="fa-solid fa-circle-user"
                   title="Tài khoản của tôi"
                 />
-
-                <HeaderSearchListItem
-                  itemClass="header-search-list__item header__navbar-cart"
-                  iconName={faCartShopping}
-                  iconClass="fa-solid fa-cart-shopping"
-                  title="Giỏ hàng"
-                />
+                <Link to={"/cart"}>
+                  <HeaderSearchListItem
+                    itemClass="header-search-list__item header__navbar-cart"
+                    iconName={faCartShopping}
+                    iconClass="fa-solid fa-cart-shopping"
+                    title="Giỏ hàng"
+                  />
+                </Link>
               </ul>
             </div>
           </div>
@@ -133,46 +141,55 @@ const NavBar = () => {
                 iconName={faLaptop}
                 iconClass="fa-solid fa-mobile-screen-button"
                 title="TẤT CẢ"
+                onClick={() => handleFilterClick("TẤT CẢ")}
               />
               <HeaderMenuItem
                 iconName={faLaptop}
                 iconClass="fa-solid fa-mobile-screen-button"
                 title="HP"
+                onClick={() => handleFilterClick("HP")}
               />
               <HeaderMenuItem
                 iconName={faCoffee}
                 iconClass="fa-solid fa-laptop"
                 title="DELL"
+                onClick={() => handleFilterClick("DELL")}
               />
               <HeaderMenuItem
                 iconName={faGamepad}
                 iconClass="fa-solid fa-tablet-screen-button"
                 title="ASUS"
+                onClick={() => handleFilterClick("ASUS")}
               />
               <HeaderMenuItem
                 iconName={faLaptopCode}
                 iconClass="fa-brands fa-apple"
-                title="LG"
+                title="MACBOOK"
+                onClick={() => handleFilterClick("MACBOOK")}
               />
               <HeaderMenuItem
                 iconName={faLaptop}
                 iconClass="fa-solid fa-computer"
                 title="ACER"
+                onClick={() => handleFilterClick("ACER")}
               />
               <HeaderMenuItem
                 iconName={faLaptopCode}
                 iconClass="fa-solid fa-headphones"
-                title="MACBOOK"
+                title="LG"
+                onClick={() => handleFilterClick("LG")}
               />
               <HeaderMenuItem
                 iconName={faLaptop}
                 iconClass="fa-solid fa-sim-card"
                 title="RAZER"
+                onClick={() => handleFilterClick("RAZER")}
               />
               <HeaderMenuItem
                 iconName={faLaptop}
                 iconClass="fa-brands fa-salesforce"
                 title="LENOVO"
+                onClick={() => handleFilterClick("LENOVO")}
               />
             </ul>
           </div>

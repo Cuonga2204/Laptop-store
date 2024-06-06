@@ -103,7 +103,7 @@ html {
     align-items: center;
 }
 
-.btn-primary {
+.btn--primary {
     color: var(--white-color);
     background-color: var(--primary-color);
 }
@@ -167,9 +167,13 @@ html {
 
 
 
+
+
 .product-infor {}
 
-.product-infor__name {}
+.product-infor__name {
+    color: var(--text-color);
+}
 
 .product-infor__prom {
     display: flex;
@@ -209,8 +213,8 @@ html {
     font-size: 16px;
     line-height: 19px;
     color: #6c757d;
-    margin-bottom: 9px;
-    margin-right: 10px;
+    margin-bottom: 20px;
+    margin-right: 15px;
 }
 .product-config-param__icon{
     margin-right: 3px;
@@ -248,11 +252,15 @@ html {
     margin-right: 12px;
 }
 
+
 .add-product-cart {
     background-color: #bfc0c0;
     border-radius: 5px;
     font-size: 1.6rem;
 
+}
+.product-link{
+    text-decoration: none;
 }
 /* modal */
 .modal{

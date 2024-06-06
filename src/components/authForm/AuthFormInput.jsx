@@ -1,15 +1,15 @@
 import React from "react";
 
-export default function AuthFormInput({ placeholder }) {
+export default function AuthFormInput({ placeholder, type, value, onChange }) {
   return (
-    <div>
-      <div className="auth-form__group">
-        <input
-          type="text"
-          className="auth-form__input"
-          placeholder={placeholder}
-        />
-      </div>
+    <div className="auth-form__group">
+      <input
+        type={type}
+        className="auth-form__input"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      />
     </div>
   );
 }
