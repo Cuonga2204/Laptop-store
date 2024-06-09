@@ -29,7 +29,7 @@ export default function Product({ product }) {
             className={"product-config-param"}
           />
         </Link>
-        <AddProduct />
+        <AddProduct product={product} />
       </div>
     </>
   );

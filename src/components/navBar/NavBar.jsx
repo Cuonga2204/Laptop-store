@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import CartNavbar from "./CartNavbar";
+import { CartContext } from "../../context/CartContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import {
@@ -64,11 +65,19 @@ const HeaderMenuItem = ({ iconName, iconClass, title, onClick }) => {
 };
 
 const HeaderSearchListItem = ({ iconName, iconClass, title, itemClass }) => {
+  const { cartItems } = useContext(CartContext);
+  const countProducts = cartItems.reduce(
+    (total, item) => (total += item.quantity),
+    0
+  );
   return (
     <li className={itemClass}>
       <a href="/">
         <div className="base-icon">
           <FontAwesomeIcon icon={iconName} className={iconClass} />
+          {title === "Giỏ hàng" && (
+            <span class="header__cart-notice">{countProducts} </span>
+          )}
         </div>
         <span className="header-search-list-item-name">{title}</span>
         <CartNavbar />

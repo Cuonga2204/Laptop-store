@@ -27,27 +27,29 @@ import ProductPage from './page/ProductPage.jsx';
 import Cart from './page/Cart.jsx';
 import Order from './page/Order.jsx'
 import OrderStatus from './page/OrderStatus.jsx';
-
+import { CartProvider } from './context/CartContext.js';
 
 function App() {
   const [products, setProducts] = useState(DEFAULT__PRODUCTS);
   const [filter, setFilter] = useState("TẤT CẢ");
   return (
-    <Router >
-      <div className='App'>
-        <Routes>
-          <Route path="/" element={<Layout setFilter={setFilter} />}>
-            <Route path="/" element={<Container products={products} filter={filter} />} />
-            <Route path="/products/:productId" element={<ProductPage products={products} />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/order" element={<Order />} />
-            <Route path='/orderStatus' element={<OrderStatus />} />
-          </Route >
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </div>
-    </Router >
+    <CartProvider>
+      <Router >
+        <div className='App'>
+          <Routes>
+            <Route path="/" element={<Layout setFilter={setFilter} products={products} />}>
+              <Route path="/" element={<Container products={products} filter={filter} />} />
+              <Route path="/products/:productId" element={<ProductPage products={products} />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/order" element={<Order />} />
+              <Route path='/orderStatus' element={<OrderStatus />} />
+            </Route >
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </div>
+      </Router >
+    </CartProvider>
   );
 }
 export default App;

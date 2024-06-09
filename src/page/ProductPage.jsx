@@ -23,6 +23,11 @@ export default function ProductPage({ products }) {
   if (!product) {
     return <div>Product not found</div>;
   }
+  function formatPrice(price) {
+    return new Intl.NumberFormat("vi-VN", {
+      maximumSignificantDigits: 3,
+    }).format(price);
+  }
   return (
     <>
       <div className="container">
@@ -45,10 +50,10 @@ export default function ProductPage({ products }) {
                   <ProductViewAssess />
                   <div class="product-view__prom">
                     <div class="product-view__price-current">
-                      {product.currentPrice}
+                      {formatPrice(product.currentPrice)}đ
                     </div>
                     <span class="product-view__price-old">
-                      {product.oldPrice}
+                      {product.oldPrice}vnđ
                     </span>
                   </div>
                   <ProductViewTransport />
@@ -61,7 +66,7 @@ export default function ProductPage({ products }) {
                       </div>
                     </div>
                   </div>
-                  <AddProduct />
+                  <AddProduct product={product} />
                 </div>
               </div>
             </div>

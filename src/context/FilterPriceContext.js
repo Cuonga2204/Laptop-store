@@ -3,10 +3,19 @@ import React, { createContext, useState, useContext } from "react";
 const FilterPriceContext = createContext();
 
 export function FilterPriceProvider({ children }) {
-    const [filterPrice, setFilterPrice] = useState({ title: "", value: "" });
+    const [filterPrices, setFilterPrices] = useState([]);
 
+    const updateFilterPrices = (price) => {
+        setFilterPrices((prevPrices) => {
+            if (prevPrices.includes(price)) {
+                return prevPrices.filter((p) => p !== price);
+            } else {
+                return [...prevPrices, price];
+            }
+        });
+    };
     return (
-        <FilterPriceContext.Provider value={{ filterPrice, setFilterPrice }}>
+        <FilterPriceContext.Provider value={{ filterPrices, updateFilterPrices }}>
             {children}
         </FilterPriceContext.Provider>
     );

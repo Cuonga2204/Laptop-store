@@ -114,6 +114,20 @@ html {
   color: var(--white-color);
   background-color: var(--primary-color);
 }
+
+/* keyfame */
+
+@keyframes notify-growth {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+  
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 /* product */
 
 
@@ -251,13 +265,19 @@ html {
     min-width: 112px;
     margin-right: 12px;
 }
-
+.add-product-buy:hover {
+    background-color: #aa0404;
+}
 
 .add-product-cart {
-    background-color: #bfc0c0;
+    background-color: #99a2aa;
+    color: white;
     border-radius: 5px;
     font-size: 1.6rem;
 
+}
+.add-product-cart:hover{
+    background-color: #75787a;
 }
 .product-link{
     text-decoration: none;

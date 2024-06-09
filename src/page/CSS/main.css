@@ -711,6 +711,9 @@
     position: relative;
 }
 .header__navbar-user:hover .header__navbar-user-menu {
+    will-change: opacity;
+    transform-origin: calc(100% - 20px) 0;
+    animation: notify-growth ease-in 0.2s;
     display: block;
   }
   .header__navbar-user-name {
@@ -855,14 +858,21 @@
   }
   
   /* Cart */
-
+  .react-slideshow-container .nav {
+    z-index: 1 !important;
+    position: absolute;
+    cursor: pointer;
+}
 .header__navbar-cart{
     position: relative;
 }
 .header__navbar-cart:hover .header__cart-list {
     display: block;
+    will-change: opacity;
+    transform-origin: calc(100% - 20px) 0;
+    animation: notify-growth ease-in 0.2s
   }
-
+ 
 .header__cart-icon {
     font-size: 2.4rem;
     color: var(--white-color);
@@ -894,10 +904,21 @@
   .header__cart-list-item {
     padding-left: 0;
     list-style: none;
-    max-height: 56vh;
     overflow-y: auto;
+    height: 270px;
   }
-  
+  .header__cart-notice{
+    position: absolute;
+    padding: 1px 7px;
+    font-size: 1.4rem;
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    border-radius: 10px;
+    line-height: 1.4rem;
+    top: -8px;
+    right: -8px;
+    border: 2px solid #EE4D2D;
+}
   .header__cart-item {
     display: flex;
     align-items: center;
@@ -1020,19 +1041,28 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+
   }
   
   .header__cart-no-cart-img {
     width: 54%;
-    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    /* display: none; */
   }
   
   .header__cart-no-cart-msg {
-    display: none;
-    font-size: 1.4rem;
-    margin-top: 14px;
-    color: var(--text-color);
-  }
+       /* display: none; */
+       font-size: 1.8rem;
+       margin-top: 22px;
+       margin-bottom: 9px;
+       color: var(--text-color);
+       display: flex;
+       justify-content: center;
+       font-weight: 600;
+   }
+  
   .product-img:hover {
     transform: translateY(-2px);
     box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.05);
