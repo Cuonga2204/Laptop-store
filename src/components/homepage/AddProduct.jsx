@@ -1,15 +1,18 @@
 import React from "react";
 import { CartContext } from "../../context/CartContext";
 import { useContext } from "react";
-export default function AddProduct({ product }) {
+import { Link } from "react-router-dom";
+export default function AddProduct({ product, quantity }) {
   const { addToCart } = useContext(CartContext);
   return (
     <>
       <div className="add-product">
-        <button className="btn add-product-buy">Mua ngay</button>
+        <Link className="product-link" to={`/products/${product.id}`}>
+          <button className="btn add-product-buy">Xem chi tiết</button>
+        </Link>
         <button
           className="btn add-product-cart"
-          onClick={() => addToCart(product)}
+          onClick={() => addToCart(product, quantity)}
         >
           Thêm vào giỏ hàng
         </button>

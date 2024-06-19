@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import CartItem from "./CartItem";
 import { CartContext } from "../../context/CartContext";
+import { Link } from "react-router-dom";
 const Cart = () => {
   const { cartItems } = useContext(CartContext);
 
@@ -21,6 +22,7 @@ const Cart = () => {
           <ul className="header__cart-list-item">
             {cartItems.map((item, index) => (
               <CartItem
+                id={item.id}
                 key={index}
                 imageUrl={item.imageUrl}
                 name={item.name}
@@ -29,9 +31,11 @@ const Cart = () => {
               />
             ))}
           </ul>
-          <a href="/" className="header__cart-view-cart btn btn--primary">
-            Xem giỏ hàng
-          </a>
+          <Link to={"/Cart"}>
+            <a href="/" className="header__cart-view-cart btn btn--primary">
+              Xem giỏ hàng
+            </a>
+          </Link>
         </>
       )}
     </div>

@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import CartHeader from "../components/cart/CartHeader";
 import CartProductByList from "../components/cart/CartProductByList";
 import DEFAULT__PRODUCTS from "../mockData/DefaultProduct";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
+import { formatPrice } from "../components/utility/format";
 export default function Cart() {
-  const products = [
-    DEFAULT__PRODUCTS[0],
-    DEFAULT__PRODUCTS[1],
-    DEFAULT__PRODUCTS[2],
-  ];
+  const { cartItems } = useContext(CartContext);
+  const products = [...cartItems];
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.currentPrice * item.quantity,
+    0
+  );
   return (
     <>
       <div className="container">
@@ -19,7 +22,9 @@ export default function Cart() {
             <CartProductByList products={products} />
             <div class="cart-product-pay">
               <div class="cart-product-total">Tồng Tiền : </div>
-              <div class="cart-product-total-price">13.000.000</div>
+              <div class="cart-product-total-price">
+                {formatPrice(totalPrice)}
+              </div>
               <Link to={"/order"}>
                 <button class="btn btn-cart-pay"> Thanh toán</button>
               </Link>

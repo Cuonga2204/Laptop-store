@@ -72,16 +72,22 @@ const HeaderSearchListItem = ({ iconName, iconClass, title, itemClass }) => {
   );
   return (
     <li className={itemClass}>
-      <a href="/">
-        <div className="base-icon">
+      <div className="base-icon">
+        {title === "Giỏ hàng" ? (
+          <Link to={"/Cart"}>
+            <FontAwesomeIcon icon={iconName} className={iconClass} />
+          </Link>
+        ) : (
           <FontAwesomeIcon icon={iconName} className={iconClass} />
-          {title === "Giỏ hàng" && (
-            <span class="header__cart-notice">{countProducts} </span>
-          )}
-        </div>
-        <span className="header-search-list-item-name">{title}</span>
-        <CartNavbar />
-      </a>
+        )}
+        {/* <FontAwesomeIcon icon={iconName} className={iconClass} /> */}
+        {title === "Giỏ hàng" && (
+          <span class="header__cart-notice">{countProducts} </span>
+        )}
+      </div>
+      <span className="header-search-list-item-name">{title}</span>
+      <CartNavbar />
+
       <HeaderUserMenu />
     </li>
   );
@@ -131,14 +137,12 @@ const NavBar = ({ setFilter }) => {
                   iconClass="fa-solid fa-circle-user"
                   title="Tài khoản của tôi"
                 />
-                <Link to={"/cart"}>
-                  <HeaderSearchListItem
-                    itemClass="header-search-list__item header__navbar-cart"
-                    iconName={faCartShopping}
-                    iconClass="fa-solid fa-cart-shopping"
-                    title="Giỏ hàng"
-                  />
-                </Link>
+                <HeaderSearchListItem
+                  itemClass="header-search-list__item header__navbar-cart"
+                  iconName={faCartShopping}
+                  iconClass="fa-solid fa-cart-shopping"
+                  title="Giỏ hàng"
+                />
               </ul>
             </div>
           </div>

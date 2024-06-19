@@ -30,7 +30,8 @@ import OrderStatus from './page/OrderStatus.jsx';
 import { CartProvider } from './context/CartContext.js';
 
 function App() {
-  const [products, setProducts] = useState(DEFAULT__PRODUCTS);
+  // const [products, setProducts] = useState(DEFAULT__PRODUCTS);
+  const products = DEFAULT__PRODUCTS;
   const [filter, setFilter] = useState("TẤT CẢ");
   return (
     <CartProvider>
@@ -40,6 +41,7 @@ function App() {
             <Route path="/" element={<Layout setFilter={setFilter} products={products} />}>
               <Route path="/" element={<Container products={products} filter={filter} />} />
               <Route path="/products/:productId" element={<ProductPage products={products} />} />
+              <Route path="/page/:page" element={<Container products={products} filter={filter} />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/order" element={<Order />} />
               <Route path='/orderStatus' element={<OrderStatus />} />

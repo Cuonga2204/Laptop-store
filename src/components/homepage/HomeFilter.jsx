@@ -1,6 +1,8 @@
 import React from "react";
 import { useFilter } from "../../context/FilterContext";
 // import { sortByPrice } from "./ProductList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 export default function HomeFilter() {
   const { handleSort } = useFilter();
@@ -22,7 +24,10 @@ export default function HomeFilter() {
         <button className="btn home-filter__lable-btn">Bán chạy</button>
         <div className="slect-input">
           <span className="slect-input__label">{selectedSort}</span>
-          <i className="slect-input__label-icon fa-solid fa-angle-down"></i>
+          <FontAwesomeIcon
+            icon={faAngleDown}
+            className="slect-input__label-icon"
+          />
           <ul className="slect-input-list">
             <li className="slect-input-item">
               <div

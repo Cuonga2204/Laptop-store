@@ -2,15 +2,15 @@ import React from "react";
 import Product from "./Product";
 import { useFilter } from "../../context/FilterContext";
 import { useFilterPrice } from "../../context/FilterPriceContext";
+
 export default function ProductList({ products, filter }) {
   const { sortBy } = useFilter();
   const { filterPrices } = useFilterPrice();
+
   let filteredProducts =
     filter === "TẤT CẢ"
       ? products
       : products.filter((product) => product.name.includes(filter));
-
-  // console.log(sortBy);
 
   if (sortBy === "ASC") {
     filteredProducts = filteredProducts.sort(
@@ -21,7 +21,7 @@ export default function ProductList({ products, filter }) {
       (a, b) => b.currentPrice - a.currentPrice
     );
   }
-  console.log(filterPrices);
+
   const filterProductsByPrice = (product) => {
     if (filterPrices.length === 0) {
       return true;
@@ -52,6 +52,7 @@ export default function ProductList({ products, filter }) {
   };
 
   filteredProducts = filteredProducts.filter(filterProductsByPrice);
+
   return (
     <>
       <div className="home-product">

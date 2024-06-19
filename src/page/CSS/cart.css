@@ -35,7 +35,7 @@
 }
 .cart-header__name{
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     width: 46%;
     display: flex;
     align-items: center;
@@ -43,12 +43,13 @@
 .cart-header__price{
     margin-left: auto;
     width: 15%;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+
     text-align: center; 
     color: var(--text-color);
 }
 .cart-header__quantity{
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     width: 15%;
     text-align: center;
     color:var(--text-color);
@@ -57,14 +58,14 @@
     width: 11%;
     text-align: center;
     color: var(--text-color);
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 
 .cart-header__operation{
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     width: 12%;
     text-align: center;
-    color: #888;
+    color:var(--text-color);
 }
 /* Cart-product-by */
 .cart-product-by{

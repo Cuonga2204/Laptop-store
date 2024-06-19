@@ -1,29 +1,44 @@
 import React from "react";
-
-export default function OrderStatusProductItem({ product }) {
+import { formatPrice } from "../utility/format";
+export default function OrderStatusProductItem({
+  product,
+  handleViewOrderDetail,
+}) {
+  // console.log(orderList);
+  // console.log(orderListIndex);
+  // console.log(1);
   return (
     <>
       <li className="product-order-item">
         <div className="product-order-infor">
           <img src={product.imageUrl} alt="" />
-          <span class="product-order-infor__name">{product.name}</span>
+          <span className="product-order-infor__name">{product.name}</span>
           <div className="product-order-quantity">
-            <span>x1</span>
+            <span>x{product.quantity}</span>
           </div>
-          <div class="product-order-price">
-            <div class="product-order-price__current">
-              {product.currentPrice}
+          <div className="product-order-price">
+            <div className="product-order-price__current">
+              {formatPrice(product.currentPrice)}
             </div>
-            <span class="product-order-price__old">{product.oldPrice} </span>
+            <span className="product-order-price__old">
+              {product.oldPrice}{" "}
+            </span>
           </div>
         </div>
-        <div class="product-order-price-total">
-          <span>Thành tiền :</span>
-          <div class="product-order-price-total__current">10.790.000đ</div>
+        <div className="product-order-price-total">
+          <span>
+            Thành tiền :
+            <span className="product-order-price-total-number">
+              {formatPrice(product.quantity * product.currentPrice)}
+            </span>
+          </span>
+          <div className="product-order-price-total__current"></div>
         </div>
-        <div class="product-order-btn">
-          <button class="btn btn-cancel"> Huỷ</button>
-          <button class="btn btn-contact"> Xem chi tiết đơn hàng</button>
+        <div className="product-order-btn">
+          {/* <button className="btn btn-cancel"> Huỷ</button> */}
+          <button className="btn btn-contact" onClick={handleViewOrderDetail}>
+            Xem chi tiết đơn hàng
+          </button>
         </div>
       </li>
     </>

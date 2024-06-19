@@ -28,7 +28,8 @@
     border-radius: 16px;
 }
 .inforOrder-infor{
-    height: 700px;
+    padding-bottom: 70px;
+    height: auto;
 }
 .inforOrder__header{
     font-size: 20px;
@@ -140,4 +141,48 @@
     border: none;
     font-size: 1.6rem;
     cursor: pointer;
+}
+/* Phương thức thanh toán */
+.pay-order-select{
+    width: 280px;
+    cursor: pointer;
+    position: relative;
+    padding: 16px;
+    background-color:white ;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+
+.pay-order-select-list{
+    padding-left: 16px;
+    list-style: none;
+    left: 0;
+    right: 0;
+    top: 40px;
+}
+.pay-order-select-item{
+    font-size: 1.6rem;
+    padding: 12px 0;
+}
+.pay-order-select-item__input{
+    margin-right: 10px;
+}
+.pay-order-select-item__input:checked::before{
+    background-color: var(--primary-color);
+}
+
+
+/* pay online */
+.pay-online{
+    margin-top: 20px;
+    background-color: #f6f7f9 ;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+.pay-online-input{
+    width: 100%;
+}
+.product-order-price-total-number {
+    color: var(--primary-color);
 }

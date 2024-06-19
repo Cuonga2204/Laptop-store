@@ -8,13 +8,14 @@ import ProductViewTransport from "../components/homeProduct/ProductViewTransport
 import ProductQuantity from "../components/homeProduct/ProductQuantity";
 import AddProduct from "../components/homepage/AddProduct";
 import PRODUCT__DETAIL from "../mockData/ProductDetail";
-
 import ProductConnectItem from "../components/homeProduct/ProductConnectItem";
 import DEFAULT__PRODUCTS from "../mockData/DefaultProduct";
 import { useProducts } from "../context/ProductContext";
+import { useState } from "react";
 export default function ProductPage({ products }) {
   const { productId } = useParams();
   const product = products.find((p) => p.id === parseInt(productId, 10));
+  const [quantity, setQuantity] = useState(1);
   const images = [
     product.imageUrl,
     "/img/viewProduct2.jpeg",
@@ -60,13 +61,16 @@ export default function ProductPage({ products }) {
                   <div class="product-view-quantity">
                     <h3>Số lượng</h3>
                     <div class="product-view-quantity-right">
-                      <ProductQuantity />
+                      <ProductQuantity
+                        quantity={quantity}
+                        setQuantity={setQuantity}
+                      />
                       <div class="product-view-quantity-rest">
                         400 sản phẩm có sẵn
                       </div>
                     </div>
                   </div>
-                  <AddProduct product={product} />
+                  <AddProduct product={product} quantity={quantity} />
                 </div>
               </div>
             </div>
