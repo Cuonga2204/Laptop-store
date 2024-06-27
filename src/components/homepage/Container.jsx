@@ -9,7 +9,7 @@ import ProductList from "./ProductList";
 import Pagination from "./Pagination";
 import { FilterProvider } from "../../context/FilterContext";
 import { FilterPriceProvider } from "../../context/FilterPriceContext";
-
+import { useMemo } from "react";
 export default function Container({ products, filter }) {
   const { page = 1 } = useParams(); // Lấy số trang từ URL, mặc định là 1
   const images = [
@@ -19,12 +19,20 @@ export default function Container({ products, filter }) {
   ];
 
   const PRODUCTS_PER_PAGE = 9; // Số sản phẩm trên mỗi trang
-  const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+  const filteredProducts = useMemo(() => {
+    if (filter === "TẤT CẢ") {
+      return products;
+    }
+    return products.filter((product) => product.name.includes(filter));
+  }, [products, filter]);
+
+  // Tính tổng số trang dựa trên số sản phẩm đã lọc
+  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
 
   // Tính toán vị trí bắt đầu và kết thúc của sản phẩm trên mỗi trang
   const startIndex = (page - 1) * PRODUCTS_PER_PAGE;
   const endIndex = startIndex + PRODUCTS_PER_PAGE;
-  const paginatedProducts = products.slice(startIndex, endIndex);
+  const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
 
   return (
     <>
