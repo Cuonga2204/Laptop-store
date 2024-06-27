@@ -3,17 +3,21 @@ import AuthHeader from "./AuthHeader";
 import { Link, useNavigate } from "react-router-dom";
 import AuthFormInput from "./AuthFormInput";
 import { useState, useEffect } from "react";
+import { useMemo } from "react";
 export default function AuthContainer({ title }) {
-  const DEFAULT_ACCOUNTS = [
-    {
-      email: "Cuong123",
-      password: "123",
-    },
-    {
-      email: "manh123",
-      password: "123",
-    },
-  ];
+  const DEFAULT_ACCOUNTS = useMemo(
+    () => [
+      {
+        email: "Cuong123",
+        password: "123",
+      },
+      {
+        email: "manh123",
+        password: "123",
+      },
+    ],
+    []
+  );
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,8 +30,12 @@ export default function AuthContainer({ title }) {
 
   useEffect(() => {
     const storedAccounts = JSON.parse(localStorage.getItem("listAccount"));
-    setListAccount(storedAccounts);
-  }, []);
+    if (storedAccounts) {
+      setListAccount(storedAccounts);
+    } else {
+      localStorage.setItem("listAccount", JSON.stringify(DEFAULT_ACCOUNTS));
+    }
+  }, [DEFAULT_ACCOUNTS]);
 
   const handleSignUp = () => {
     if (password !== confirmPassword) {

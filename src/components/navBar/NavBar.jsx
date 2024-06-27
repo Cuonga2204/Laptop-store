@@ -15,7 +15,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import HeaderUserMenu from "./HeaderUserMenu";
-import { useState } from "react";
 const HeaderLogo = () => {
   return (
     <Link to={"/"}>
