@@ -15,7 +15,6 @@ export default function Order() {
     phone: "",
     email: "",
     address: "",
-    paymentMethod: "Thanh toán khi nhận hàng",
   });
   const { cartItems } = useContext(CartContext);
   const products = [...cartItems];
@@ -23,7 +22,7 @@ export default function Order() {
     (total, item) => total + item.currentPrice * item.quantity,
     0
   );
-  const [paymentMethod, setPaymentMethod] = useState("");
+  // const [paymentMethod, setPaymentMethod] = useState("");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,13 +32,13 @@ export default function Order() {
     });
   };
 
-  const handlePaymentChange = (event) => {
-    setPaymentMethod(event.target.value);
-    setFormData({
-      ...formData,
-      paymentMethod: event.target.value,
-    });
-  };
+  // const handlePaymentChange = (event) => {
+  //   setPaymentMethod(event.target.value);
+  //   setFormData({
+  //     ...formData,
+  //     paymentMethod: event.target.value,
+  //   });
+  // };
 
   const handleSubmit = () => {
     let orders = JSON.parse(localStorage.getItem("orderData") || "[]");
@@ -107,6 +106,7 @@ export default function Order() {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
+                z
               />
             </div>
             <div className="customerAddress">
@@ -134,7 +134,7 @@ export default function Order() {
                     name="payment-method"
                     value="Thanh toán khi nhận hàng"
                     className="pay-order-select-item__input"
-                    onChange={handlePaymentChange}
+                    // onChange={handlePaymentChange}
                   />
                   <label htmlFor="Thanh toán khi nhận hàng">
                     Thanh toán khi nhận hàng
@@ -147,13 +147,13 @@ export default function Order() {
                     name="payment-method"
                     value="Thanh toán online"
                     className="pay-order-select-item__input"
-                    onChange={handlePaymentChange}
+                    // onChange={handlePaymentChange}
                   />
                   <label htmlFor="Thanh toán online">Thanh toán online</label>
                 </li>
               </ul>
             </div>
-            {paymentMethod === "Thanh toán online" && (
+            {/* {paymentMethod === "Thanh toán online" && (
               <div className="pay-online">
                 <input
                   className="input-infor input-infor_1-0 pay-online-input"
@@ -166,7 +166,7 @@ export default function Order() {
                   placeholder="Nhập mật khẩu thẻ"
                 />
               </div>
-            )}
+            )} */}
 
             <button className="btn btn-pay" onClick={handleSubmit}>
               Thanh toán

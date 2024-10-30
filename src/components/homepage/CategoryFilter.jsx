@@ -1,18 +1,6 @@
 import React from "react";
 import Category from "./Category";
 export default function CategoryFilter() {
-  const manufacturers = [
-    "Tất Cả",
-    "Macbook",
-    "Asus",
-    "HP",
-    "Dell",
-    "Razer",
-    "LG",
-    "Mac",
-    "Lenovo",
-  ];
-
   const prices = [
     "Tất cả",
     "Dưới 10 triệu",
@@ -25,7 +13,6 @@ export default function CategoryFilter() {
   return (
     <div>
       <nav className="category">
-        <Category title="Hãng sản xuất" items={manufacturers} />
         <Category title="Mức giá" items={prices} />
       </nav>
     </div>

@@ -9,6 +9,7 @@ export default function AuthFormInput({ placeholder, type, value, onChange }) {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        autoComplete="new-password"
       />
     </div>
   );

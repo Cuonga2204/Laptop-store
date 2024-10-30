@@ -4,38 +4,43 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthFormInput from "./AuthFormInput";
 import { useState, useEffect } from "react";
 import { useMemo } from "react";
+import * as UserService from "../../services/UserService";
+// import { useMutation } from "@tanstack/react-query";
+import { useMutationHooks } from "../../hooks/useMutationHooks";
 export default function AuthContainer({ title }) {
-  const DEFAULT_ACCOUNTS = useMemo(
-    () => [
-      {
-        email: "Cuong123",
-        password: "123",
-      },
-      {
-        email: "manh123",
-        password: "123",
-      },
-    ],
-    []
-  );
+  // const DEFAULT_ACCOUNTS = useMemo(
+  //   () => [
+  //     {
+  //       email: "Cuong123",
+  //       password: "123",
+  //     },
+  //     {
+  //       email: "manh123",
+  //       password: "123",
+  //     },
+  //   ],
+  //   []
+  // );
+  const mutation = useMutationHooks((data) => UserService.loginUser(data));
+  console.log("mutation", mutation);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [listAccount, setListAccount] = useState(DEFAULT_ACCOUNTS);
+  // const [listAccount, setListAccount] = useState(DEFAULT_ACCOUNTS);
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedAccounts = JSON.parse(localStorage.getItem("listAccount"));
-    if (storedAccounts) {
-      setListAccount(storedAccounts);
-    } else {
-      localStorage.setItem("listAccount", JSON.stringify(DEFAULT_ACCOUNTS));
-    }
-  }, [DEFAULT_ACCOUNTS]);
+  // useEffect(() => {
+  //   const storedAccounts = JSON.parse(localStorage.getItem("listAccount"));
+  //   if (storedAccounts) {
+  //     setListAccount(storedAccounts);
+  //   } else {
+  //     localStorage.setItem("listAccount", JSON.stringify(DEFAULT_ACCOUNTS));
+  //   }
+  // }, [DEFAULT_ACCOUNTS]);
 
   const handleSignUp = () => {
     if (password !== confirmPassword) {
@@ -43,29 +48,31 @@ export default function AuthContainer({ title }) {
       return;
     }
     // Store user details in localStorage
-    const newAccount = [...listAccount, { email: email, password: password }];
-    localStorage.setItem("listAccount", JSON.stringify(newAccount));
+    // const newAccount = [...listAccount, { email: email, password: password }];
+    // localStorage.setItem("listAccount", JSON.stringify(newAccount));
     alert("Đăng ký thành công!");
   };
 
   const handleLogin = () => {
-    const storedAccounts = JSON.parse(localStorage.getItem("listAccount"));
-    const foundAccount = storedAccounts.find(
-      (account) => account.email === email && account.password === password
-    );
-
-    if (foundAccount) {
-      navigate("/"); // Điều chỉnh đường dẫn tới trang chủ của bạn
-    } else {
-      alert("Email hoặc mật khẩu không đúng!");
-    }
+    // const storedAccounts = JSON.parse(localStorage.getItem("listAccount"));
+    // const foundAccount = storedAccounts.find(
+    //   (account) => account.email === email && account.password === password
+    // );
+    // if (foundAccount) {
+    //   navigate("/"); // Điều chỉnh đường dẫn tới trang chủ của bạn
+    // } else {
+    //   alert("Email hoặc mật khẩu không đúng!");
+    // }
   };
 
   return (
     <div>
-      <AuthHeader title={title} />
-      {/* {children} */}
-      <div className="container-login">
+      <form
+        className="container-login"
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <div className="modal__body">
           <div className="auth-form">
             <div className="auth-form__container">
@@ -78,6 +85,7 @@ export default function AuthContainer({ title }) {
                   )}
                 </h3>
               </div>
+
               <div className="auth-form__form">
                 <AuthFormInput
                   value={email}
@@ -89,6 +97,7 @@ export default function AuthContainer({ title }) {
                   value={password}
                   placeholder="Nhập mật khẩu"
                   onChange={handlePasswordChange}
+                  autoComplete="new-password"
                 />
                 {title === "Đăng ký" && (
                   <AuthFormInput
@@ -96,9 +105,11 @@ export default function AuthContainer({ title }) {
                     type="password"
                     value={confirmPassword}
                     onChange={handleConfirmPasswordChange}
+                    autoComplete="new-password"
                   />
                 )}
               </div>
+
               <div className="auth-form__aside">
                 <p className="auth-form__policy-text">
                   Bằng việc đăng ký, bạn có đồng ý
@@ -142,7 +153,7 @@ export default function AuthContainer({ title }) {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

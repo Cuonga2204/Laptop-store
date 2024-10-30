@@ -81,7 +81,7 @@ const HeaderSearchListItem = ({ iconName, iconClass, title, itemClass }) => {
         )}
         {/* <FontAwesomeIcon icon={iconName} className={iconClass} /> */}
         {title === "Giỏ hàng" && (
-          <span class="header__cart-notice">{countProducts} </span>
+          <span className="header__cart-notice">{countProducts} </span>
         )}
       </div>
       <span className="header-search-list-item-name">{title}</span>

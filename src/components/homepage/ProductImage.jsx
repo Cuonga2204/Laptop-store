@@ -1,5 +1,7 @@
 import React from "react";
 import ProductBadge from "./ProductBadge";
+import { Link } from "react-router-dom";
+
 export default function ProductImage({ imageUrl, backgroundUrl }) {
   return (
     <>
@@ -11,9 +13,11 @@ export default function ProductImage({ imageUrl, backgroundUrl }) {
           backgroundPosition: "center center",
         }}
       >
-        <a href="/">
+        {/* Link wrapping the image */}
+        <Link to="/">
           <img src={imageUrl} alt="Product" />
-        </a>
+        </Link>
+        {/* Product badge or any other content */}
         <ProductBadge />
       </div>
     </>

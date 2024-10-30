@@ -26,7 +26,7 @@ export default function OrderLapList() {
   ];
   return (
     <>
-      <h2 class="order-lap-header">LAP TOP THEO NHU CẦU</h2>
+      <h2 className="order-lap-header">LAP TOP THEO NHU CẦU</h2>
       <div className="grid__row">
         {items.map((item, index) => (
           <OrderLapItem key={index} src={item.src} title={item.title} />
